@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /*==========================
+COURSES PAGE
+==========================*/
+
+.course-container{
+
+background:white;
+
+padding:25px;
+
+border-radius:12px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.course-header h2{
+
+color:brown;
+
+margin-bottom:10px;
+
+}
+
+.course-header p{
+
+color:#666;
+
+margin-bottom:20px;
+
+}
+
+.course-form{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+margin-bottom:25px;
+
+}
+
+.form-group{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.form-group label{
+
+margin-bottom:8px;
+
+font-weight:bold;
+
+color:brown;
+
+}
+
+.form-group input,
+
+.form-group select{
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:16px;
+
+}
+
+.course-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+.course-table th{
+
+background:rgb(173,76,76);
+
+color:white;
+
+padding:15px;
+
+}
+
+.course-table td{
+
+padding:15px;
+
+border-bottom:1px solid #ddd;
+
+text-align:center;
+
+}
+
+.course-table tr:hover{
+
+background:#f7f7f7;
+
+}
+
+.registered{
+
+background:#d4edda;
+
+color:#155724;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:14px;
+
+font-weight:bold;
+
+}
+
+.course-summary{
+
+margin-top:20px;
+
+font-size:20px;
+
+font-weight:bold;
+
+color:brown;
+
+}
+
+.course-buttons{
+
+margin-top:25px;
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.register-btn{
+
+background:rgb(173,76,76);
+
+color:white;
+
+border:none;
+
+padding:14px 25px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+.print-btn{
+
+background:#fff;
+
+border:2px solid rgb(173,76,76);
+
+color:rgb(173,76,76);
+
+padding:14px 25px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+.register-btn:hover{
+
+background:brown;
+
+}
+
+.print-btn:hover{
+
+background:rgb(173,76,76);
+
+color:white;
+
+}
+.registered{
+
+background:#d4edda;
+
+color:#155724;
+
+padding:6px 15px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+transition:.4s;
+
+}
+
+.register-btn,.print-btn{
+
+transition:.3s;
+
+}
+
+.register-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+.print-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+</style>
+<body>
+    <div class="course-container">
+
+    <div class="course-header">
+
+        <h2>📚 Course Registration</h2>
+
+        <p>Register your courses for the current academic session.</p>
+
+    </div>
+
+    <div class="course-form">
+
+        <div class="form-group">
+
+            <label>Academic Session</label>
+
+            <select>
+
+                <option>2026/2027</option>
+
+                <option>2027/2028</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Term</label>
+
+            <select>
+
+                <option>First Term</option>
+                <option>Second Term</option>
+                <option>Third Term</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Search Course</label>
+
+            <input type="text" placeholder="Search courses ">
+
+        </div>
+
+    </div>
+
+    <table class="course-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Select</th>
+
+                <th>Course Title</th>
+
+                <th>Credit Unit</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>Mathematics</td>
+
+                <td>3</td>
+
+                <td><span class="registered">Available</span></td>
+
+            </tr>
+
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>English Langauge</td>
+
+                <td>3</td>
+
+                <td><span class="registered">Available</span></td>
+
+            </tr>
+
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>Biology</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>Physical Health Educational</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>Agriculture</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            <tr>
+                <td><input type="checkbox"></td>
+
+                <td>Basic Science</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            <tr>
+            <td><input type="checkbox"></td>
+
+                <td>Government</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            
+            <tr>
+            <td><input type="checkbox"></td>
+
+                <td>Literature in English</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            
+            <tr>
+            <td><input type="checkbox"></td>
+
+                <td>Commerce</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            <tr>
+            <td><input type="checkbox"></td>
+
+                <td>Accounting</td>
+
+                <td>3</td>
+                <td><span class="registered">Available</span></td>
+            <tr>
+            <td><input type="checkbox"></td>
+
+                <td>Marketing</td>
+
+                <td>3</td>
+            
+                <td><span class="registered">Available</span></td>
+
+            </tr>
+
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>Physics</td>
+
+                <td>3</td>
+
+                <td><span class="registered">Available</span></td>
+
+            </tr>
+
+            <tr>
+
+                <td><input type="checkbox"></td>
+
+                <td>Chemistry</td>
+
+                <td>3</td>
+
+                <td><span class="registered">Available</span></td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="course-summary">
+
+        <h3>Total Credit Units : <span>15</span></h3>
+
+    </div>
+
+    <div class="course-buttons">
+
+        <button class="register-btn">Register Courses</button>
+
+        <button class="print-btn">Print Registration Slip</button>
+
+    </div>
+
+</div>
+<script>
+   /* ===========================
+   COURSE REGISTRATION
+=========================== */
+
+// Get all checkboxes
+const checkboxes = document.querySelectorAll(".course-table input[type='checkbox']");
+
+// Total Unit Display
+const totalUnit = document.querySelector(".course-summary span");
+
+// Every course = 3 Units
+function calculateUnits(){
+
+    let total = 0;
+
+    checkboxes.forEach(box=>{
+
+        if(box.checked){
+
+            total += 3;
+
+        }
+
+    });
+
+    totalUnit.innerHTML = total;
+
+}
+
+// Listen for checkbox changes
+checkboxes.forEach(box=>{
+
+    box.addEventListener("change",calculateUnits);
+
+});
+
+// Register Courses
+
+document.querySelector(".register-btn").addEventListener("click",function(){
+
+    let selectedCourses=[];
+
+    document.querySelectorAll(".course-table tbody tr").forEach(row=>{
+
+        let check=row.querySelector("input");
+
+        if(check.checked){
+
+            selectedCourses.push(row.cells[1].innerText);
+
+            row.querySelector(".registered").innerHTML="Registered";
+
+            row.querySelector(".registered").style.background="#28a745";
+
+            row.querySelector(".registered").style.color="#fff";
+
+        }
+
+    });
+
+    if(selectedCourses.length===0){
+
+        alert("Please select at least one course.");
+
+        return;
+
+    }
+
+    alert(
+        "✅ Registration Successful!\n\n"+
+        selectedCourses.join("\n")
+    );
+
+});
+
+// Print Registration Slip
+
+document.querySelector(".print-btn").addEventListener("click",function(){
+
+    window.print();
+
+});
+
+// Live Search
+
+document.querySelector(".course-form input").addEventListener("keyup",function(){
+
+    let value=this.value.toLowerCase();
+
+    let rows=document.querySelectorAll(".course-table tbody tr");
+
+    rows.forEach(row=>{
+
+        let course=row.cells[1].innerText.toLowerCase();
+
+        if(course.includes(value)){
+
+            row.style.display="";
+
+        }
+
+        else{
+
+            row.style.display="none";
+
+        }
+
+    });
+
+});
+</script>
+</body>
+</html>

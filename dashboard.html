@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f8;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:rgb(173,76,76);
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:15px 20px;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+.menu-btn{
+    font-size:30px;
+    cursor:pointer;
+    margin-right:15px;
+    user-select:none;
+}
+
+.navbar h2{
+    font-size:24px;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-260px;
+    width:250px;
+    height:100%;
+    background:white;
+    transition:.4s;
+    box-shadow:2px 0 10px rgba(0,0,0,.2);
+    padding-top:80px;
+    z-index:999;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.sidebar p{
+    padding:18px 25px;
+    font-size:18px;
+    color:brown;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.sidebar p:hover{
+    background:rgb(173,76,76);
+    color:white;
+}
+
+/* Overlay */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.4);
+    display:none;
+    z-index:998;
+}
+
+.overlay.active{
+    display:block;
+}
+
+/* MAIN CONTENT */
+.main{
+    margin-top:90px;
+    padding:20px;
+}
+
+.marquee{
+    overflow:hidden;
+    white-space:nowrap;
+    margin-bottom:25px;
+}
+
+.marquee h2{
+    display:inline-block;
+    animation:move 10s linear infinite;
+    color:black;
+}
+
+@keyframes move{
+0%{
+transform:translateX(-100%);
+}
+100%{
+transform:translateX(150%);
+}
+}
+
+/* Cards */
+.extra-text{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    transition:.3s;
+    text-align:center;
+    font-weight:bold;
+    color:#333;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+footer{
+    margin-top:40px;
+    background:rgb(173,76,76);
+    color:white;
+    text-align:center;
+    padding:18px;
+    font-size: smaller;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+.navbar h2{
+font-size:20px;
+}
+
+.card{
+padding:20px;
+}
+
+}
+
+@media(max-width:480px){
+
+.navbar{
+padding:12px;
+}
+
+.menu-btn{
+font-size:28px;
+}
+
+.navbar h2{
+font-size:18px;
+}
+
+.card{
+font-size:15px;
+padding:18px;
+}
+
+}
+.dashboard-container{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    margin-top:20px;
+}
+
+.student-panel{
+    flex:2;
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.announcement-panel{
+    flex:1;
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+/* Scroll Area */
+
+.student-scroll{
+
+    max-height:520px;
+    overflow-y:auto;
+    margin-top:15px;
+    padding-right:8px;
+
+}
+
+/* Beautiful Scrollbar */
+
+.student-scroll::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.student-scroll::-webkit-scrollbar-thumb{
+
+    background:rgb(173,76,76);
+    border-radius:20px;
+
+}
+
+.student-scroll::-webkit-scrollbar-track{
+
+    background:#eeeeee;
+
+}
+
+/* Information Cards */
+
+.info-card{
+
+    background:#fafafa;
+    border-left:5px solid rgb(173,76,76);
+
+    margin-bottom:15px;
+
+    padding:15px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.info-card:hover{
+
+    transform:translateX(6px);
+
+    box-shadow:0 8px 15px rgba(0,0,0,.15);
+
+}
+
+.info-card strong{
+
+    color:brown;
+    font-size:17px;
+
+}
+
+.info-card p{
+
+    margin-top:8px;
+
+    color:#444;
+
+}
+
+/* Announcement Box */
+
+#announcementBox{
+
+    margin-top:20px;
+
+    background:#f8f8f8;
+
+    border-left:5px solid rgb(173,76,76);
+
+    border-radius:10px;
+
+    padding:20px;
+
+    min-height:180px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#333;
+
+    transition:opacity .8s ease;
+
+}
+
+/* Mobile */
+
+@media(max-width:900px){
+
+.dashboard-container{
+
+flex-direction:column;
+
+}
+
+.student-panel{
+
+width:100%;
+
+}
+
+.announcement-panel{
+
+width:100%;
+
+}
+
+.student-scroll{
+
+max-height:400px;
+
+}
+
+}
+/* Student Header */
+
+.student-header{
+
+text-align:center;
+
+margin-bottom:20px;
+
+animation:fadeIn 1s;
+
+}
+
+.student-header img{
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+border:5px solid rgb(173,76,76);
+
+object-fit:cover;
+
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+margin-bottom:15px;
+
+}
+
+.student-header h3{
+
+color:brown;
+
+margin-bottom:10px;
+
+font-size:24px;
+
+}
+
+.student-header p{
+
+margin-top:6px;
+
+font-size:17px;
+
+font-weight:bold;
+
+color:#555;
+
+}
+
+/* Fade animation */
+
+body{
+
+animation:fadeInBody .8s;
+
+}
+
+@keyframes fadeInBody{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+/* ==========================
+PROFILE
+========================== */
+
+.navbar{
+
+justify-content:space-between;
+
+}
+
+.profile-area{
+
+position:relative;
+
+}
+
+.profile-box{
+
+position:relative;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.profile-box:hover{
+
+transform:scale(1.08);
+
+}
+
+.profile-pic{
+
+width:52px;
+
+height:52px;
+
+border-radius:50%;
+
+border:3px solid white;
+
+object-fit:cover;
+
+box-shadow:0 5px 15px rgba(0,0,0,.3);
+
+}
+
+/* Online Indicator */
+
+.online-dot{
+
+position:absolute;
+
+bottom:4px;
+
+right:2px;
+
+width:14px;
+
+height:14px;
+
+background:#16d916;
+
+border-radius:50%;
+
+border:2px solid white;
+
+animation:pulse 1.5s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:0 0 0 0 rgba(22,217,22,.7);
+
+}
+
+70%{
+
+box-shadow:0 0 0 10px rgba(22,217,22,0);
+
+}
+
+100%{
+
+box-shadow:0 0 0 0 rgba(22,217,22,0);
+
+}
+
+}
+
+/* Dropdown */
+
+.profile-menu{
+
+position:absolute;
+
+top:70px;
+
+right:0;
+
+width:100px;
+
+background:white;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+overflow:hidden;
+
+display:none;
+
+opacity:0;
+
+transform:translateY(-10px);
+
+transition:.3s;
+
+z-index:10000;
+
+}
+
+.profile-menu.show{
+
+display:block;
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+.profile-menu a{
+
+display:block;
+
+padding:15px;
+
+text-decoration:none;
+
+font-size:17px;
+
+color:brown;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.profile-menu a:hover{
+
+background:rgb(173,76,76);
+
+color:white;
+
+}
+.D{
+    background-color: brown;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div style="display:flex;align-items:center;">
+
+        <div class="menu-btn" onclick="openMenu()">☰</div>
+
+        <h2>Dashboard</h2>
+
+    </div>
+
+    <!-- Profile -->
+
+    <div class="profile-area">
+
+        <div class="profile-box" onclick="toggleProfileMenu()">
+
+            <img src="images/pasport .jpeg" class="profile-pic">
+
+            <span class="online-dot"></span>
+
+        </div>
+
+        <div class="profile-menu" id="profileMenu">
+
+            <a href="#" onclick="logoutUser()"> Logout</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+
+<p><a href="home.htm">🏠 Home</a></p>
+
+<p><a href="pay fees.htm">💳 Pay Fees</a></p>
+
+<p><a href="courses.html">📚 Courses</a></p>
+
+<p>📈 Check Result</p>
+
+<p><a href="settings.html">⚙ Settings</a></p>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+<div class="marquee">
+<h2> <p class="D"> Welcome to Your Student Dashboard 👋</h2>
+</div>
+
+<div class="dashboard-container">
+
+    <!-- LEFT SIDE -->
+    <div class="student-panel">
+
+    
+        <div class="student-header">
+
+<img src="images/pasport .jpeg" id="profileImage">
+
+<h3 id="greeting"></h3>
+
+<p id="todayDate"></p>
+
+<p id="liveClock"></p>
+
+</div>
+
+        <div class="student-scroll">
+
+            <div class="info-card">
+                <strong>Student Name</strong>
+                <p>Gomos Justin Timothy</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Admission Number</strong>
+                <p>ST2026001</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Class</strong>
+                <p>JSS 3</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Course of Study</strong>
+                <p>Sciences</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Academic Session</strong>
+                <p>2026/2027 Second Term</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Gender</strong>
+                <p>Male</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Date of Birth</strong>
+                <p>05 March</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Age</strong>
+                <p>16 Years</p>
+            </div>
+
+            <div class="info-card">
+                <strong>House</strong>
+                <p>Blue House</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Parent/Guardian</strong>
+                <p>Mr. Timothy</p>
+            </div>
+
+            <div class="info-card">
+                <strong>Status</strong>
+                <p>Active Student ✅</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="announcement-panel">
+
+        <h2>📢 Announcements</h2>
+
+        <div id="announcementBox">
+
+            Loading announcements...
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Student Dashboard | Designed by Gomos Justin Timothy
+</footer>
+
+<script>
+
+function openMenu(){
+
+document.getElementById("sidebar").classList.add("active");
+document.getElementById("overlay").classList.add("active");
+
+}
+
+function closeMenu(){
+
+document.getElementById("sidebar").classList.remove("active");
+document.getElementById("overlay").classList.remove("active");
+
+}
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Escape"){
+closeMenu();
+}
+
+});
+
+const announcements=[
+
+"📢 Welcome back students! We wish you a successful academic session.",
+
+"📅 School fees must be paid before 15th August 2026.",
+
+"📝 Continuous Assessment begins next Monday. Prepare adequately.",
+
+"🔬 Science practical classes will hold every Thursday by 10:00 AM.",
+
+"👨‍👩‍👧 Parents/Teachers meeting is scheduled for Friday at 9:00 AM."
+
+];
+
+let currentAnnouncement=0;
+
+const announcementBox=document.getElementById("announcementBox");
+
+function showAnnouncement(){
+
+announcementBox.style.opacity=0;
+
+setTimeout(function(){
+
+announcementBox.innerHTML=announcements[currentAnnouncement];
+
+announcementBox.style.opacity=1;
+
+currentAnnouncement++;
+
+if(currentAnnouncement>=announcements.length){
+
+currentAnnouncement=0;
+
+}
+
+},500);
+
+}
+
+
+showAnnouncement();
+
+// Change every 5 seconds
+
+setInterval(showAnnouncement,5000);
+
+function updateGreeting(){
+
+let hour=new Date().getHours();
+
+let greeting="";
+
+if(hour<12){
+
+greeting="☀ Good Morning";
+
+}
+
+else if(hour<17){
+
+greeting="🌤 Good Afternoon";
+
+}
+
+else{
+
+greeting="🌙 Good Evening";
+
+}
+
+document.getElementById("greeting").innerHTML=greeting;
+
+}
+
+updateGreeting();
+
+
+// ======================
+// Live Clock
+// ======================
+
+function updateClock(){
+
+let now=new Date();
+
+let time=now.toLocaleTimeString();
+
+document.getElementById("liveClock").innerHTML="🕒 "+time;
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+
+let today=new Date();
+
+let options={
+
+weekday:"long",
+
+year:"numeric",
+
+month:"long",
+
+day:"numeric"
+
+};
+
+document.getElementById("todayDate").innerHTML=
+
+"📅 "+today.toLocaleDateString("en-US",options);
+
+const profileMenu=document.getElementById("profileMenu");
+
+function toggleProfileMenu(){
+
+profileMenu.classList.toggle("show");
+
+}
+
+
+window.onclick=function(e){
+
+if(!e.target.closest(".profile-area")){
+
+profileMenu.classList.remove("show");
+
+}
+
+}
+
+
+function logoutUser(){
+
+let answer=confirm("Are you sure you want to log out?");
+
+if(answer){
+
+window.location.href="login.html";
+
+}
+
+}
+</script>
+
+</body>
+</html>

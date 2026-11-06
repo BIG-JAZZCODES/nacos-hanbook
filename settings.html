@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /*========================================
+SETTINGS PAGE
+========================================*/
+
+.settings-container{
+
+display:flex;
+
+gap:25px;
+
+margin-top:20px;
+
+}
+
+/* LEFT MENU */
+
+.settings-sidebar{
+
+width:260px;
+
+background:white;
+
+border-radius:12px;
+
+padding:20px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+height:fit-content;
+
+}
+
+.settings-sidebar h2{
+
+text-align:center;
+
+color:brown;
+
+margin-bottom:20px;
+
+}
+
+.setting-btn{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:10px;
+
+border:none;
+
+border-radius:8px;
+
+background:#f7f7f7;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:.3s;
+
+text-align:left;
+
+font-weight:bold;
+
+color:#555;
+
+}
+
+.setting-btn:hover{
+
+background:rgb(173,76,76);
+
+color:white;
+
+transform:translateX(6px);
+
+}
+
+.setting-btn.active{
+
+background:rgb(173,76,76);
+
+color:white;
+
+}
+
+.logout{
+
+background:#b22222;
+
+color:white;
+
+margin-top:20px;
+
+}
+
+.logout:hover{
+
+background:#8b0000;
+
+}
+
+/* RIGHT CONTENT */
+
+.settings-content{
+
+flex:1;
+
+background:white;
+
+padding:30px;
+
+border-radius:12px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+/* PAGE TITLE */
+
+.setting-page h2{
+
+color:brown;
+
+margin-bottom:25px;
+
+}
+
+/* PROFILE IMAGE */
+
+.profile-image{
+
+text-align:center;
+
+margin-bottom:25px;
+
+}
+
+.profile-image img{
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+border:5px solid rgb(173,76,76);
+
+object-fit:cover;
+
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+transition:.3s;
+
+}
+
+.profile-image img:hover{
+
+transform:scale(1.05);
+
+}
+
+.profile-image button{
+
+margin-top:15px;
+
+padding:12px 22px;
+
+border:none;
+
+background:rgb(173,76,76);
+
+color:white;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+.profile-image button:hover{
+
+background:brown;
+
+}
+
+/* FORM */
+
+.profile-form{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:20px;
+
+}
+
+.input-box{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.input-box label{
+
+font-weight:bold;
+
+margin-bottom:8px;
+
+color:#444;
+
+}
+
+.input-box input,
+
+.input-box select,
+
+.input-box textarea{
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+outline:none;
+
+transition:.3s;
+
+font-size:15px;
+
+}
+
+.input-box input:focus,
+
+.input-box select:focus,
+
+.input-box textarea:focus{
+
+border:2px solid rgb(173,76,76);
+
+box-shadow:0 0 10px rgba(173,76,76,.25);
+
+}
+
+/* SAVE BUTTON */
+
+.save-btn{
+
+margin-top:30px;
+
+padding:15px 35px;
+
+background:rgb(173,76,76);
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-weight:bold;
+
+}
+
+.save-btn:hover{
+
+background:brown;
+
+transform:translateY(-4px);
+
+}
+
+/* HIDE OTHER PAGES */
+
+.setting-page{
+
+display:none;
+
+animation:fade .4s;
+
+}
+
+.active-page{
+
+display:block;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.settings-container{
+
+flex-direction:column;
+
+}
+
+.settings-sidebar{
+
+width:100%;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.profile-form{
+
+grid-template-columns:1fr;
+
+}
+
+.profile-image img{
+
+width:120px;
+
+height:120px;
+
+}
+
+}
+</style>
+<body>
+    <div class="settings-container">
+
+    <!-- LEFT SETTINGS MENU -->
+
+    <div class="settings-sidebar">
+
+        <h2>⚙ Settings</h2>
+
+        <button class="setting-btn active" onclick="showSetting('profile')">👤 Profile</button>
+
+        <button class="setting-btn" onclick="showSetting('account')">🔒 Account</button>
+
+        <button class="setting-btn" onclick="showSetting('notifications')">🔔 Notifications</button>
+
+        <button class="setting-btn" onclick="showSetting('security')">🛡 Security</button>
+
+        <button class="setting-btn" onclick="showSetting('downloads')">📥 Downloads</button>
+
+        <button class="setting-btn" onclick="showSetting('support')">❓ Help & Support</button>
+
+        <button class="setting-btn logout">🚪 Logout</button>
+
+    </div>
+
+
+
+    <!-- RIGHT CONTENT -->
+
+    <div class="settings-content">
+
+
+
+
+<!-- PROFILE -->
+
+<div id="profile" class="setting-page active-page">
+
+<h2>👤 Student Profile</h2>
+
+<div class="profile-image">
+
+<img src="images/profile.jpg" id="previewImage">
+
+<input type="file" id="uploadImage" hidden>
+
+<button onclick="document.getElementById('uploadImage').click()">
+
+📷 Upload Picture
+
+</button>
+
+</div>
+
+
+
+<div class="profile-form">
+
+<div class="input-box">
+
+<label>Full Name</label>
+
+<input type="text" value="Gomos Justin Timothy">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Admission Number</label>
+
+<input type="text" value="PLASU/CSC/2026/001">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Email</label>
+
+<input type="email">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Phone Number</label>
+
+<input type="text">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Department</label>
+
+<input type="text" value="Computer Science">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Level</label>
+
+<input type="text" value="100 Level">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Gender</label>
+
+<select>
+
+<option>Male</option>
+
+<option>Female</option>
+
+</select>
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Date of Birth</label>
+
+<input type="date">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Home Address</label>
+
+<textarea rows="3"></textarea>
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Parent / Guardian</label>
+
+<input type="text">
+
+</div>
+
+
+
+<div class="input-box">
+
+<label>Guardian Phone</label>
+
+<input type="text">
+
+</div>
+
+</div>
+
+
+
+<button class="save-btn">
+
+ Save Changes
+
+</button>
+
+</div>
+
+
+
+
+
+<!-- ACCOUNT -->
+
+<div id="account" class="setting-page">
+
+<h2>🔒 Account Settings</h2>
+
+<p>This section will contain username, email and password settings.</p>
+
+</div>
+
+
+
+
+
+<!-- NOTIFICATIONS -->
+
+<div id="notifications" class="setting-page">
+
+<h2>🔔 Notifications</h2>
+
+<p>This section will contain notification preferences.</p>
+
+</div>
+
+
+
+
+
+<!-- SECURITY -->
+
+<div id="security" class="setting-page">
+
+<h2>🛡 Security</h2>
+
+<p>This section will contain security settings.</p>
+
+</div>
+
+
+
+
+
+<!-- DOWNLOADS -->
+
+<div id="downloads" class="setting-page">
+
+<h2>📥 Downloads</h2>
+
+<p>This section will contain downloadable documents.</p>
+
+</div>
+
+
+
+
+
+<!-- SUPPORT -->
+
+<div id="support" class="setting-page">
+
+<h2>❓ Help & Support</h2>
+
+<p>This section will contain support options.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/*========================================
+SETTINGS MENU
+========================================*/
+
+const buttons = document.querySelectorAll(".setting-btn");
+const pages = document.querySelectorAll(".setting-page");
+
+function showSetting(pageId){
+
+    // Hide all pages
+    pages.forEach(page=>{
+        page.classList.remove("active-page");
+    });
+
+    // Remove active button
+    buttons.forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    // Show selected page
+    document.getElementById(pageId).classList.add("active-page");
+
+    // Highlight active button
+    event.target.classList.add("active");
+
+}
+
+
+/*========================================
+PROFILE IMAGE PREVIEW
+========================================*/
+
+const uploadImage = document.getElementById("uploadImage");
+const previewImage = document.getElementById("previewImage");
+
+uploadImage.addEventListener("change",function(){
+
+    const file = this.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload=function(e){
+
+            previewImage.src=e.target.result;
+
+        }
+
+        reader.readAsDataURL(file);
+
+    }
+
+});
+
+
+/*========================================
+SAVE PROFILE
+========================================*/
+
+document.querySelector(".save-btn").addEventListener("click",function(){
+
+showSuccessMessage("Profile Updated Successfully!");
+
+});
+
+
+/*========================================
+SUCCESS POPUP
+========================================*/
+
+function showSuccessMessage(message){
+
+const popup=document.createElement("div");
+
+popup.innerHTML="✅ "+message;
+
+popup.style.position="fixed";
+
+popup.style.top="25px";
+
+popup.style.right="25px";
+
+popup.style.background="rgb(173,76,76)";
+
+popup.style.color="white";
+
+popup.style.padding="18px 30px";
+
+popup.style.borderRadius="10px";
+
+popup.style.boxShadow="0 10px 20px rgba(0,0,0,.25)";
+
+popup.style.fontSize="16px";
+
+popup.style.zIndex="999999";
+
+popup.style.animation="slideDown .4s";
+
+document.body.appendChild(popup);
+
+setTimeout(()=>{
+
+popup.remove();
+
+},3000);
+
+}
+
+
+/*========================================
+LOGOUT
+========================================*/
+
+document.querySelector(".logout").addEventListener("click",function(){
+
+let confirmLogout=confirm("Are you sure you want to logout?");
+
+if(confirmLogout){
+
+window.location.href="login.html";
+
+}
+
+});
+
+</script>
+</body>
+</html>

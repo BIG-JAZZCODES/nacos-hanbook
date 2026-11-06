@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jowen Portal Login</title>
+</head>
+<style>
+  .container {
+    width: 400px;
+    margin: 50px auto;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 15px;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  body {
+            background-image: url('images/jowen badge.jpe ');
+            background-size: cover;
+            background-position: center;
+            height: 20vh;
+            margin: 0;
+        }
+   input {
+            display: block;
+            width: 94%;
+            margin-bottom: 10px;
+            padding: 10px;
+            padding-right: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border: 2px solid rgb(173, 74, 74);
+            border-radius: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    .bold {
+        font-weight: bold;
+    }
+     .login-btn{
+            display: inline-block;
+            width: 209px;
+            padding: 10px;
+            padding-right: 2px;
+            padding-left: 190px;
+            background-color:  rgb(156, 88, 88);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .password-box input {
+    width: 94%;
+    padding: 10px 10px;
+    margin-top: 10px;
+    padding-right: 10px;
+    border: 2px solid rgb(166, 70, 70);
+    border-radius: 10px;
+}
+img {
+        width: 100px;
+        border-radius: 50px;
+        float: left;
+        margin-right: 20px;
+     }
+.lock-icon {
+    position: absolute;
+    left: 391px;
+    top: 55%;
+    transform: translateY(-50%);
+    background-color: transparent;
+}
+.eye-icon {
+    position: absolute;
+    right: 302px;
+    top: 58%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.extra-text {
+        font-size: 14px;
+        margin-top: 10px;
+        text-align: center;
+        color: black;
+     }
+</style>
+<body>
+  <div class="container">
+    <img src="images/jowen badge.jpeg" alt="">
+    <p class="bold"> Welcome To Jowen Comprehensive Secondary School Portal</p>
+    <p>Verify Your Credentials To Login</p>
+    <input type="text" placeholder="Student Name" class="input-field">
+    <div class="password-box">
+    <span class="lock-icon"></span>
+   
+    <input type="password" id="password" placeholder="Student No:">
+   
+    <span class="eye-icon" onclick="togglePassword()">👁️</span>
+</div>
+<script>
+    function togglePassword() {
+        const p = document.getElementById('password');
+        p.type= p.type ==='password'?'text': 'password';
+    }
+  </script>
+
+     <a href="dashboard.html" class="login-btn">Login</a>
+     <body>
+      <p class="extra-text">
+    Forgot your password? <a href="resetbutton.html">Click here to reset</a>
+</p>
+
+<p class="extra-text">
+    Don’t have an account? <a href="signup.html">Sign up here</a>
+     </body>
+</html>
